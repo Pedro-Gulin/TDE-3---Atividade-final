@@ -1,0 +1,51 @@
+Agora que temos os resultados des duas condições,
+podemos fazer uma comparação:
+
+1) Falando sobre throughput:
+
+A versão "CorridaSemControle" é mais rápida, pois as
+threads conseguem executar suas funções ao mesmo tempo,
+incrementar o count. Porém, você acaba perdendo muito
+da precisão, pois elas ficam nessa corrida pra incrementar
+e acabam atrapalhando umas as outras.
+
+Já na "CorridaComSemaphore", ocorre mais lentamente, pois
+a execução é controlada, ou seja, as threads não ficam 
+atrapalhando a execução de outras, numa corrida. Aqui é
+tudo mais organizado e bem feito. Porém, com essa organização
+toda, o tempo de execução é menor, pois uma thread só pode
+iniciar sua execução quando outra terminar. Mas fica mais
+organizado.
+
+2) Falando sobre fairness:
+
+A versão "CorridaSemControle" é menos justa, pois uma thread
+pode alterar a mesma coisa, variável count, ao mesmo tempo
+que outra thread, "pulando" ela, e deixando o tempo e a contagem
+toda errada.
+
+Já a "CorridaComSemaphore" é bem mais justa, pois todas as threads
+vão poder executar sua função no seu determinado tempo, garantindo
+que todas iniciem e finalizem o processo, garantindo uma contagem
+muito mais eficiente e adequada, sem que nenhuma delas fique
+monopolizando os recursos.
+
+3) Falando sobre o "happens-before" e a visibilidade:
+
+Esse "happens-before" é da parte do código "CorridaComSemaphore",
+onde está o "release" e o "acquire". O "acquire" pega a condição
+do contador, count, da thread anterior a ele, meio que pergunta
+"o que voce mudou ai?", ai a outra thread manda o estado atual 
+do contador, ou qualquer coisa/variavel que seja, e começa sua
+execução. E quando a primeira thread manda o estado atual dela,
+ela faz isso com o "release", mandando tudo que ela alterou, antes
+do "release" para a próxima thread. Com isso, a condição/estado
+da "count" fica visível para todas as threads, o que da pra perceber
+no resultado da execução, em que o valor obtido foi exatamente igual
+ao valor esperado, garantindo que elas não se sobrepuseram.
+
+Pra explicar bem rápido da sem controle, ela não garante que as
+próximas threads peguem o estado atual da variável que a thread
+anterior mudou, ou seja, se uma faz uma mudança no tempo 1 a outra
+thread também faz, o que já ta errado, elas se sobrepoem, fazendo
+uma bagunça na execução e no incremento da variável.

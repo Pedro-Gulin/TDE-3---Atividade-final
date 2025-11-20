@@ -1,0 +1,13 @@
+Na versão "CorridaSemControle" muitas threads vão
+usar a mesma variável "static int count = 0;" ao 
+mesmo tempo. Porém, em cada incremento do count,
+ele le o valor atual e depois incrementa localmente,
+fazendo com que tenha uma perda de incrementos, pois
+elas estão atuando sobre essa variável ao mesmo tempo.
+Com isso, temos ao cenáriod de "race condition", fazendo
+com que elas fiquem interferindo/sobrescrevendo no valor
+do count umas das outras.
+
+Valor que era esperado: "Esperado=2000000"
+Valor que deu: "Obtido=1101591"
+Tempo de execução: "Tempo=0.026s"

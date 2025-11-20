@@ -1,0 +1,14 @@
+Já nesse cenário "CorridaComSemaphore", é utilizado
+uma estratégia diferente, usando o "Semaphore".
+No início do código ali, tem essa linha abaixo:
+"static final Semaphore sem = new Semaphore(1, true);",
+esse 1 indica que so uma thread vai poder incrementar por vez
+e esse "true" indica que vai acontecer o FIFO, vão incrementar
+por ordem de chegada. Com isso, cada incremento vai ficar protegido,
+usando o "acquire" e o "release", não deixando com que as threads
+usem o mesmo count ao mesmo tempo.
+
+
+Valor que era esperado: "Esperado=2000000"
+Valor que deu: "Obtido=2000000"
+Tempo de execução: "Tempo=11.368s"
