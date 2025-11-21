@@ -1,0 +1,40 @@
+Temos 5 filósofos sentados em uma mesa circular, cada um alterna entre pensar, ficar com fome e comer.
+Para poder comer cada filoso precisa de dois garfos, o da que está a sua esquerda e o que está a sua direita.
+Porem, como os garfos são compartilhados entre filósofos que estão sentados um do lado do outro, ocorre um impasse, e se todos os  filósofos ao mesmo tempo pegarem o garfo a sua esquerda??
+Isso é um deadlock pois nesse impasse tem as quatro condições de Coffman:
+Exclusão mútua: cada garfo so pode ser usado por um filosofo por vez.
+Manter-e-esperar: cada filosofo segura um garfo enquanto espera pelo outro.
+Não preempção : garfos não podem ser tomados a força
+Espera circular : filosofo 0 espera pelo garfo 1 que espera pelo garfo 2 ... que espera pelo garfo 0.
+
+Para resolver esse problema, cada garfo vai receber um índice único de 0 a 4.
+Cada filosofo vai sempre pegar primeiro o garfo com o menor índice e depois o com maior índice
+Isso vai acabar com a espera circular pois fica proibido formar ciclos onde cada processo espera por um recurso maior que o que possui.
+Assim a condição de Coffman é negada e não ocorre deadlock
+
+Dados:
+    N = 5 filósofos
+    Garfos numerados de 0 a N-1
+    O garfo i fica entre filósofo i e filósofo (i+1) mod N
+
+Para cada filósofo p:
+    garfo_esq = p
+    garfo_dir = (p + 1) mod N
+
+    left  = min(garfo_esq, garfo_dir)
+    right = max(garfo_esq, garfo_dir)
+
+Loop infinito:
+    pensar()
+    estado[p] <- "com fome"
+
+    adquirir(left)      // espera até o garfo de menor índice estar livre
+    adquirir(right)     // depois solicita o de maior índice
+
+    estado[p] <- "comendo"
+    comer()
+
+    liberar(right)
+    liberar(left)
+
+    estado[p] <- "pensando"
