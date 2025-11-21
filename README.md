@@ -1,3 +1,8 @@
+Link para o vídeo de explicação:
+
+https://www.youtube.com/watch?v=BzdW4nqhrKc
+
+
 Relatórios:
 
 Os relatórios, de cada código, estão dentro da pasta de cada código, em um arquivo chamado "relatorio.txt"
