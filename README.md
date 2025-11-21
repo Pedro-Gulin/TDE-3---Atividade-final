@@ -1,3 +1,5 @@
+Alunos: Pedro Gulin Barbosa, Matheus Pelissari
+
 Link para o vídeo de explicação:
 
 https://www.youtube.com/watch?v=BzdW4nqhrKc
