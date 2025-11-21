@@ -1,2 +1,5 @@
-# TDE-3---Atividade-final
-TDE 3 - Atividade final
+Relatórios:
+
+Os relatórios, de cada código, estão dentro da pasta de cada código, em um arquivo chamado "relatorio.txt"
+
+Comparação entre os 2 códigos do exercício 2 (semáforo) está dentro da pasta "semaforo" em um arquivo chamado "comparacao.txt"
